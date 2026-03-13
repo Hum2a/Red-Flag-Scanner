@@ -1,0 +1,40 @@
+---
+description: API design and HTTP conventions
+globs: "server/**/*.ts"
+alwaysApply: false
+---
+
+# API Conventions
+
+## REST Style
+
+- Use nouns for resources: `/api/analyze/photo`, `/api/history`.
+- Use HTTP methods correctly: GET (read), POST (create/action), PUT/PATCH (update).
+- Return appropriate status codes: 200, 201, 400, 401, 404, 500.
+
+## Response Format
+
+```typescript
+// Success
+{ data: { redFlags: string[] } }
+{ data: { id: string, identifier: string, createdAt: string } }
+
+// Error
+{ error: { message: string, code?: string } }
+```
+
+## Validation
+
+- Validate all user input (body, params, query).
+- Return 400 with clear error message for validation failures.
+- Sanitize file uploads: type, size, content.
+
+## CORS
+
+- Configure CORS for frontend origin only in production.
+- Allow credentials if using cookies/sessions.
+
+## Rate Limiting
+
+- Consider rate limiting for `/api/analyze/*` to protect AI costs.
+- Return 429 when limit exceeded.

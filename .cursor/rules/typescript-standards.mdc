@@ -1,0 +1,44 @@
+---
+description: TypeScript conventions and type safety
+globs: "**/*.ts"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+## Types Over Any
+
+- Avoid `any`; use `unknown` and narrow, or define proper types.
+- Prefer `interface` for object shapes; `type` for unions/intersections.
+
+```typescript
+// ❌ BAD
+function process(data: any) { ... }
+
+// ✅ GOOD
+interface ScanResult {
+  redFlags: string[];
+  identifier: string;
+}
+function process(data: ScanResult) { ... }
+```
+
+## Null Safety
+
+- Use optional chaining (`?.`) and nullish coalescing (`??`).
+- Prefer `T | null` over `T | undefined` when the absence has meaning.
+
+## Async
+
+- Always `await` or `.then()`; never leave promises unhandled.
+- Use `async/await` over raw `.then()` chains for readability.
+
+## Exports
+
+- Export types with `export type` for better tree-shaking.
+- Use barrel files (`index.ts`) sparingly; prefer direct imports.
+
+## Strict Mode
+
+- Keep `strict: true` in tsconfig.
+- Fix type errors; do not use `@ts-ignore` without a comment explaining why.

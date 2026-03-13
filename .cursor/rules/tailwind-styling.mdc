@@ -1,0 +1,43 @@
+---
+description: Tailwind CSS usage and styling conventions
+globs: "**/*.{tsx,css}"
+alwaysApply: false
+---
+
+# Tailwind Styling
+
+## Class Ordering
+
+Order classes logically: layout → spacing → sizing → typography → colors → borders → effects.
+
+```tsx
+// ✅ GOOD
+<button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+  Analyze
+</button>
+```
+
+## Responsive Design
+
+- Mobile-first: base styles, then `sm:`, `md:`, `lg:`.
+- Use responsive utilities for layout and spacing.
+
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+```
+
+## Custom Values
+
+- Prefer Tailwind utilities over arbitrary values when possible.
+- Use `@apply` in CSS only for repeated patterns; otherwise use `className`.
+
+## Design Tokens
+
+- Define custom colors, fonts, and spacing in `tailwind.config.js`.
+- Use semantic names: `primary`, `danger`, `muted`, not raw hex codes in components.
+
+## Avoid
+
+- Inline `style={{}}` unless dynamic values (e.g. `width: ${percent}%`).
+- Long `className` strings — extract to a variable or component if >5 utilities.
+- `!important` — fix specificity instead.

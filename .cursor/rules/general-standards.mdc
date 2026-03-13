@@ -1,0 +1,47 @@
+---
+description: Core coding standards for the project
+alwaysApply: true
+---
+
+# General Standards
+
+## Code Quality
+
+- Write clear, readable code. Prefer explicit over clever.
+- Use meaningful variable and function names.
+- Keep functions small and focused; extract when logic grows.
+- Add comments for non-obvious logic; avoid stating the obvious.
+
+## Error Handling
+
+```typescript
+// ❌ BAD — swallowing errors
+try {
+  await fetchData();
+} catch (e) {}
+
+// ✅ GOOD — log and rethrow or handle
+try {
+  await fetchData();
+} catch (e) {
+  console.error('Failed to fetch', { error: e });
+  throw new Error('Unable to retrieve data', { cause: e });
+}
+```
+
+## Imports
+
+- Use path aliases: `@/components/...` in frontend, not `../../../`.
+- Group imports: external libs first, then internal, then types.
+- Prefer named imports over default when multiple exports exist.
+
+## Security
+
+- Never commit API keys, secrets, or `.env` files.
+- Validate and sanitize user input on the backend.
+- Use environment variables for all config and secrets.
+
+## Git
+
+- Write clear commit messages: `feat: add photo upload`, `fix: handle empty results`.
+- Keep commits focused; one logical change per commit.

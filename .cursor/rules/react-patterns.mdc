@@ -1,0 +1,48 @@
+---
+description: React component patterns and conventions
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Patterns
+
+## Component Structure
+
+- Use functional components only.
+- Define props with TypeScript interfaces; avoid `any`.
+- Export components as default when they are the primary export.
+
+```tsx
+// ✅ GOOD
+interface PhotoUploadProps {
+  onUpload: (file: File) => void;
+  maxSizeMb?: number;
+}
+
+export default function PhotoUpload({ onUpload, maxSizeMb = 5 }: PhotoUploadProps) {
+  // ...
+}
+```
+
+## Hooks
+
+- Extract reusable logic into custom hooks (`usePhotoUpload`, `useRedFlags`).
+- Keep hooks in `src/hooks/` with `use` prefix.
+- Follow Rules of Hooks: no conditional hook calls.
+
+## State
+
+- Prefer local state for UI-only concerns.
+- Use `useState` for simple state; consider `useReducer` for complex flows.
+- Lift state only when multiple components need it.
+
+## Event Handlers
+
+- Use `handle` prefix: `handleSubmit`, `handleChange`.
+- Pass callbacks as props; avoid inline functions in JSX when they cause re-renders.
+
+## File Organization
+
+- One component per file (except small subcomponents).
+- Colocate related components in the same folder when tightly coupled.
+- Place shared components in `src/components/`.

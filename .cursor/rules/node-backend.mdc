@@ -1,0 +1,46 @@
+---
+description: Node.js backend structure and conventions
+globs: "server/**/*"
+alwaysApply: false
+---
+
+# Node.js Backend
+
+## Structure
+
+- `server/src/routes/` — Express/Fastify route handlers.
+- `server/src/services/` — Business logic (AI, Instagram, DB).
+- `server/src/db/` — Database schema, migrations, queries.
+- `server/src/index.ts` — App entry, middleware, route mounting.
+
+## Route Handlers
+
+- Keep route handlers thin; delegate to services.
+- Validate request body/params with a library (e.g. `zod`).
+- Return consistent response shape: `{ data }` or `{ error }`.
+
+```typescript
+// ✅ GOOD
+router.post('/api/analyze/photo', upload.single('image'), async (req, res) => {
+  const file = req.file;
+  if (!file) return res.status(400).json({ error: 'No image provided' });
+  const redFlags = await aiService.analyzeImage(file.buffer);
+  return res.json({ data: { redFlags } });
+});
+```
+
+## Services
+
+- One service per domain: `aiService`, `instagramService`, `dbService`.
+- Services are stateless; inject dependencies if needed.
+- Throw typed errors; let a global error handler format responses.
+
+## Environment
+
+- Load `.env` with `dotenv` at startup.
+- Validate required env vars on boot; fail fast if missing.
+
+## Logging
+
+- Use `console.log` for dev; consider `pino` or `winston` for production.
+- Log errors with stack traces; avoid logging sensitive data.
