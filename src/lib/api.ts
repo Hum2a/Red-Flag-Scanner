@@ -44,17 +44,15 @@ export async function getHistoryItem(id: string): Promise<{ id: string; identifi
   return json.data
 }
 
-export async function analyzeInstagramProfile(username: string): Promise<{
-  id: string
-  identifier: string
-  redFlags: string[]
-  createdAt: string
-}> {
+export async function analyzeProfile(
+  username: string,
+  randomSeed?: number
+): Promise<{ id: string; identifier: string; redFlags: string[]; createdAt: string }> {
   const res = await fetch(`${API_BASE}/api/instagram/analyze`, {
     ...fetchOpts,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username }),
+    body: JSON.stringify({ username, randomSeed }),
   })
 
   if (!res.ok) {
@@ -62,6 +60,38 @@ export async function analyzeInstagramProfile(username: string): Promise<{
     throw new Error(err.error?.message ?? 'Failed to analyze profile')
   }
 
+  const json = await res.json()
+  return json.data
+}
+
+export async function compareProfiles(
+  username1: string,
+  username2: string
+): Promise<{
+  id: string
+  identifier1: string
+  identifier2: string
+  redFlags1: string[]
+  redFlags2: string[]
+  createdAt: string
+}> {
+  const res = await fetch(`${API_BASE}/api/compare`, {
+    ...fetchOpts,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username1, username2 }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: { message: res.statusText } }))
+    throw new Error(err.error?.message ?? 'Failed to compare')
+  }
+  const json = await res.json()
+  return json.data
+}
+
+export async function getStats(): Promise<{ totalScans: number }> {
+  const res = await fetch(`${API_BASE}/api/stats`, fetchOpts)
+  if (!res.ok) return { totalScans: 0 }
   const json = await res.json()
   return json.data
 }
