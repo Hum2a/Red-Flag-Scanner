@@ -42,16 +42,16 @@ function App() {
 
   return (
     <Layout>
-      <div className="space-y-8">
-        <section>
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
+      <div className="space-y-10">
+        <section className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
+          <h2 className="mb-4 font-mono text-sm font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
             Upload a photo
           </h2>
           <PhotoUpload onUpload={handleUpload} isAnalyzing={isAnalyzing} />
         </section>
 
-        <section>
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
+        <section className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
+          <h2 className="mb-4 font-mono text-sm font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
             Or scan an Instagram profile
           </h2>
           <InstagramProfileInput
@@ -62,7 +62,7 @@ function App() {
 
         {error && (
           <div
-            className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700"
+            className="rounded-xl border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-4 py-3 text-[var(--color-accent)]"
             role="alert"
           >
             {error}
@@ -70,13 +70,13 @@ function App() {
         )}
 
         {redFlags && redFlags.length > 0 && (
-          <section>
+          <section className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8">
             <RedFlagsList redFlags={redFlags} />
           </section>
         )}
 
         <section>
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
+          <h2 className="mb-4 font-mono text-sm font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
             Recent scans
           </h2>
           <HistoryList />
