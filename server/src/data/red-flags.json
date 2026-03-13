@@ -1,0 +1,135 @@
+{
+  "triggers": [
+    {
+      "id": "portrait-selfie",
+      "condition": { "aspectRatio": "portrait" },
+      "redFlags": [
+        "Professional selfie photographer energy",
+        "That angle was definitely rehearsed",
+        "Holding the phone like it owes them money",
+        "Duck face survivor from 2012"
+      ]
+    },
+    {
+      "id": "square-instagram",
+      "condition": { "aspectRatio": "square" },
+      "redFlags": [
+        "Still posting in 1:1 like it's 2016",
+        "Instagram grid purist",
+        "Crop game weaker than their WiFi"
+      ]
+    },
+    {
+      "id": "landscape-vacation",
+      "condition": { "aspectRatio": "landscape" },
+      "redFlags": [
+        "Vacation photo flexer",
+        "Probably took 47 shots to get this one",
+        "Location tag doing the heavy lifting"
+      ]
+    },
+    {
+      "id": "very-dark",
+      "condition": { "brightness": "dark" },
+      "redFlags": [
+        "Edgy aesthetic enthusiast",
+        "Moody lighting = mysterious personality",
+        "Can't see your face but we're getting vibes",
+        "Dark mode IRL"
+      ]
+    },
+    {
+      "id": "very-bright",
+      "condition": { "brightness": "bright" },
+      "redFlags": [
+        "Influencer lighting setup in the bathroom",
+        "Overexposed to the point of transcendence",
+        "Ring light detected",
+        "Flashbang energy"
+      ]
+    },
+    {
+      "id": "warm-tones",
+      "condition": { "colorTemp": "warm" },
+      "redFlags": [
+        "Sunset filter addict",
+        "Everything orange, everything fine",
+        "Golden hour or just bad white balance?",
+        "Sepia personality"
+      ]
+    },
+    {
+      "id": "cool-tones",
+      "condition": { "colorTemp": "cool" },
+      "redFlags": [
+        "Cold aesthetic, colder personality",
+        "Blue filter = deep thoughts",
+        "Ice queen energy",
+        "Probably listens to sad music on purpose"
+      ]
+    },
+    {
+      "id": "high-saturation",
+      "condition": { "saturation": "high" },
+      "redFlags": [
+        "Saturation slider maxed out",
+        "Reality is too boring, needs more neon",
+        "Vibrancy overdose",
+        "Colors that don't exist in nature"
+      ]
+    },
+    {
+      "id": "low-saturation",
+      "condition": { "saturation": "low" },
+      "redFlags": [
+        "Desaturated life choices",
+        "Muted aesthetic, muted personality",
+        "Everything is gray",
+        "Film noir vibes (unintentional)"
+      ]
+    },
+    {
+      "id": "tiny-image",
+      "condition": { "size": "small" },
+      "redFlags": [
+        "Screenshot of a screenshot energy",
+        "Resolution from 2009",
+        "Quality so low it's a vibe",
+        "Pixel art phase"
+      ]
+    },
+    {
+      "id": "huge-image",
+      "condition": { "size": "large" },
+      "redFlags": [
+        "Professional photographer or just a really good phone",
+        "Overcompensating with megapixels",
+        "File size bigger than their personality",
+        "4K or it didn't happen"
+      ]
+    },
+    {
+      "id": "ultra-wide",
+      "condition": { "aspectRatio": "ultra-wide" },
+      "redFlags": [
+        "Cinematic or just bad at cropping",
+        "Ultra-wide lens for ultra-wide ego",
+        "Panorama of themselves",
+        "0.5x selfie enthusiast"
+      ]
+    },
+    {
+      "id": "generic",
+      "condition": { "fallback": true },
+      "redFlags": [
+        "Posted this without a second thought",
+        "Main character energy",
+        "Couldn't pick a filter so went with none",
+        "Confidently mid",
+        "This photo has seen things",
+        "Vibes: unclear",
+        "The algorithm will decide your fate"
+      ]
+    }
+  ]
+}
