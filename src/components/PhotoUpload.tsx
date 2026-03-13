@@ -88,8 +88,8 @@ export default function PhotoUpload({ onUpload, isAnalyzing }: PhotoUploadProps)
         onDrop={handleDrop}
         className={`rounded-2xl border-2 border-dashed p-8 text-center transition-all duration-300 ${
           dragActive
-            ? 'border-[var(--color-accent)] bg-[var(--color-accent-glow)]'
-            : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-text-dim)]'
+            ? 'scale-[1.02] border-[var(--color-accent)] bg-[var(--color-accent-glow)]'
+            : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:scale-[1.01] hover:border-[var(--color-text-dim)]'
         }`}
       >
         <input
@@ -110,7 +110,7 @@ export default function PhotoUpload({ onUpload, isAnalyzing }: PhotoUploadProps)
               <img
                 src={preview}
                 alt="Preview"
-                className="mx-auto max-h-56 rounded-xl object-contain ring-1 ring-[var(--color-border)]"
+                className="mx-auto max-h-56 rounded-xl object-contain ring-1 ring-[var(--color-border)] transition-transform duration-300 hover:scale-[1.02]"
               />
               <p className="text-sm text-[var(--color-text-muted)]">
                 Click to change or analyze below
@@ -158,7 +158,7 @@ export default function PhotoUpload({ onUpload, isAnalyzing }: PhotoUploadProps)
               type="button"
               onClick={handleSubmit}
               disabled={isAnalyzing}
-              className="rounded-xl bg-[var(--color-accent)] px-6 py-2.5 font-medium text-white transition-all hover:bg-[var(--color-accent-hover)] hover:shadow-[0_0_20px_var(--color-accent-glow)] disabled:opacity-50"
+              className="rounded-xl bg-[var(--color-accent)] px-6 py-2.5 font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--color-accent-hover)] hover:shadow-[0_0_20px_var(--color-accent-glow)] disabled:opacity-50"
             >
               {isAnalyzing ? (
                 <span className="flex items-center gap-2">
@@ -192,7 +192,7 @@ export default function PhotoUpload({ onUpload, isAnalyzing }: PhotoUploadProps)
               type="button"
               onClick={handleClear}
               disabled={isAnalyzing}
-              className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-2.5 font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-text-dim)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-elevated)] disabled:opacity-50"
+              className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-2.5 font-medium text-[var(--color-text-muted)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-text-dim)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-elevated)] disabled:opacity-50"
             >
               Clear
             </button>
