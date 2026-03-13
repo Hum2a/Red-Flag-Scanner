@@ -6,10 +6,10 @@ import type Database from 'better-sqlite3'
 
 type Db = InstanceType<typeof Database>
 
-const USERNAME_REGEX = /instagram\.com\/([a-zA-Z0-9._]+)/i
+const USERNAME_REGEX = /(?:instagram\.com|tiktok\.com|twitter\.com|x\.com)\/([a-zA-Z0-9._]+)/i
 
 function parseUsername(input: string): string | null {
-  const u = input.trim()
+  const u = input.trim().replace(/^@/, '')
   if (!u) return null
   if (/^[a-zA-Z0-9._]+$/.test(u)) return u
   const match = u.match(USERNAME_REGEX)
@@ -21,7 +21,7 @@ export function createInstagramRouter(db: Db) {
 
   router.post('/analyze', async (req: Request, res: Response) => {
     try {
-      const { username: input } = req.body as { username?: string }
+      const { username: input, randomSeed } = req.body as { username?: string; randomSeed?: number }
       if (!input || typeof input !== 'string') {
         res.status(400).json({ error: { message: 'Username is required' } })
         return
@@ -34,7 +34,7 @@ export function createInstagramRouter(db: Db) {
       }
 
       await new Promise((r) => setTimeout(r, 1200 + Math.random() * 800))
-      const redFlags = analyzeUsername(username)
+      const redFlags = analyzeUsername(username, randomSeed)
       const id = randomUUID()
       insertScan(db, id, `@${username}`, redFlags)
 

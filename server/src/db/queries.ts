@@ -41,3 +41,9 @@ export function getScanById(db: Database.Database, id: string): {
     redFlags: JSON.parse(row.redFlags) as string[],
   }
 }
+
+export function getScanCount(db: Database.Database): number {
+  const stmt = db.prepare(`SELECT COUNT(*) as count FROM scanned_accounts`)
+  const row = stmt.get() as { count: number }
+  return row?.count ?? 0
+}

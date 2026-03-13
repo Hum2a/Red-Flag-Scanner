@@ -54,12 +54,13 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 
 /**
  * "Analyze" a username and return red flags based on arbitrary factors.
- * Factors: length, character composition, seeded randomness.
- * Same username always gets same result.
+ * Same username + same randomSeed = same result.
+ * Pass randomSeed for "scan again" to get different flags.
  */
-export function analyzeUsername(username: string): string[] {
+export function analyzeUsername(username: string, randomSeed?: number): string[] {
   const allFlags = loadAllRedFlags()
-  const seed = seedFromUsername(username)
+  const baseSeed = seedFromUsername(username)
+  const seed = randomSeed !== undefined ? (baseSeed ^ randomSeed) >>> 0 : baseSeed
 
   const len = username.length
   const count = Math.min(
