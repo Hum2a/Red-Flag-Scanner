@@ -65,6 +65,13 @@ export default function SharedResultPage() {
   return (
     <Layout>
       <div className="animate-slide-up space-y-6">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)] transition-all duration-200 hover:-translate-x-0.5 hover:text-[var(--color-text)]"
+        >
+          <span aria-hidden>←</span>
+          Back to home
+        </Link>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h1 className="font-mono text-xl font-medium text-[var(--color-text)]">
             Red flags for {data.identifier}
