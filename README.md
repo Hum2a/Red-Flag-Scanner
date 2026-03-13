@@ -20,20 +20,14 @@ cd server && npm install
 
 ### 2. Configure environment
 
-Copy `server/.env.example` to `server/.env`. For Instagram, create an app at [developers.facebook.com](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/getting-started):
+Copy `server/.env.example` to `server/.env`:
 
 ```
 PORT=3001
 NODE_ENV=development
 DATABASE_PATH=./data/scanner.db
-SESSION_SECRET=change-this-in-production
 FRONTEND_URL=http://localhost:5173
-INSTAGRAM_APP_ID=your-app-id
-INSTAGRAM_APP_SECRET=your-app-secret
-INSTAGRAM_REDIRECT_URI=http://localhost:5173/api/auth/instagram/callback
 ```
-
-**Note:** Instagram's API only supports Business and Creator accounts. Both the connecting user and the profile being scanned must be professional accounts.
 
 ### 3. Run the app
 
