@@ -1,6 +1,6 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? ''
 
-const fetchOpts: RequestInit = { credentials: 'include' }
+const fetchOpts: RequestInit = {}
 
 export async function analyzePhoto(file: File): Promise<{ id: string; identifier: string; redFlags: string[]; createdAt: string }> {
   const formData = new FormData()
@@ -44,25 +44,7 @@ export async function getHistoryItem(id: string): Promise<{ id: string; identifi
   return json.data
 }
 
-export function getInstagramAuthUrl(): string {
-  return `${API_BASE}/api/auth/instagram`
-}
-
-export async function getInstagramStatus(): Promise<{ connected: boolean }> {
-  const res = await fetch(`${API_BASE}/api/auth/instagram/status`, fetchOpts)
-  if (!res.ok) return { connected: false }
-  const json = await res.json()
-  return json.data
-}
-
-export async function logoutInstagram(): Promise<void> {
-  await fetch(`${API_BASE}/api/auth/instagram/logout`, {
-    ...fetchOpts,
-    method: 'POST',
-  })
-}
-
-export async function analyzeInstagramProfile(profileUrl: string): Promise<{
+export async function analyzeInstagramProfile(username: string): Promise<{
   id: string
   identifier: string
   redFlags: string[]
@@ -72,7 +54,7 @@ export async function analyzeInstagramProfile(profileUrl: string): Promise<{
     ...fetchOpts,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ profileUrl }),
+    body: JSON.stringify({ username }),
   })
 
   if (!res.ok) {
