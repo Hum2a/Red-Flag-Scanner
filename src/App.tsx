@@ -26,12 +26,12 @@ function App() {
     }
   }
 
-  const handleInstagramAnalyze = async (profileUrl: string) => {
+  const handleInstagramAnalyze = async (username: string) => {
     setIsAnalyzing(true)
     setError(null)
     setRedFlags(null)
     try {
-      const result = await analyzeInstagramProfile(profileUrl)
+      const result = await analyzeInstagramProfile(username)
       setRedFlags(result.redFlags)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong')
