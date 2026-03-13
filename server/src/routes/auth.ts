@@ -1,13 +1,6 @@
 import { Router, type Request, type Response } from 'express'
 import { getAuthUrl, exchangeCodeForToken } from '../services/instagramService.js'
 
-declare module 'express-session' {
-  interface SessionData {
-    instagramAccessToken?: string
-    instagramUserId?: string
-  }
-}
-
 const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:5173'
 
 export function createAuthRouter() {
@@ -38,7 +31,7 @@ export function createAuthRouter() {
       const { accessToken, userId } = await exchangeCodeForToken(code)
       req.session.instagramAccessToken = accessToken
       req.session.instagramUserId = userId
-      req.session.save((err) => {
+      req.session.save((err: Error | null) => {
         if (err) {
           console.error('Session save error:', err)
           res.redirect(`${FRONTEND_URL}?error=session_failed`)
