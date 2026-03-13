@@ -45,8 +45,13 @@ Open http://localhost:5173. The frontend proxies `/api` and `/health` to the bac
 
 ## Features
 
-- **Photo upload** — Drag and drop or click to upload a photo. Get AI-generated red flags.
-- **Scan history** — View recent scans and expand to see past flags.
+- **Photo upload** — Drag and drop or click to upload a photo. Get red flags from image analysis.
+- **Profile scan** — Enter Instagram, TikTok, or X username. Satirical analysis (no real API).
+- **Compare mode** — Compare two profiles side by side.
+- **Share results** — Copy, share, or export as image. Shareable links at `/r/:id`.
+- **Scan again** — Get different flags for the same username (random mode).
+- **Stats** — Total profiles scanned.
+- **404 page** — Custom error page.
 
 ## Project structure
 
