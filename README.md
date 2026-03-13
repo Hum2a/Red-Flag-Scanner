@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Red Flag Scanner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A satirical web app that analyzes photos or Instagram profiles and generates "red flags" using AI.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend**: React 19, Vite 8, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: SQLite
+- **Matching**: Rule-based image analysis + curated red flags dataset
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Install dependencies
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+cd server && npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Configure environment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Copy `server/.env.example` to `server/.env`. For Instagram, create an app at [developers.facebook.com](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/getting-started):
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+PORT=3001
+NODE_ENV=development
+DATABASE_PATH=./data/scanner.db
+SESSION_SECRET=change-this-in-production
+FRONTEND_URL=http://localhost:5173
+INSTAGRAM_APP_ID=your-app-id
+INSTAGRAM_APP_SECRET=your-app-secret
+INSTAGRAM_REDIRECT_URI=http://localhost:5173/api/auth/instagram/callback
+```
+
+**Note:** Instagram's API only supports Business and Creator accounts. Both the connecting user and the profile being scanned must be professional accounts.
+
+### 3. Run the app
+
+**Terminal 1 — Backend:**
+```bash
+npm run dev:server
+```
+
+**Terminal 2 — Frontend:**
+```bash
+npm run dev
+```
+
+Open http://localhost:5173. The frontend proxies `/api` and `/health` to the backend.
+
+## Features
+
+- **Photo upload** — Drag and drop or click to upload a photo. Get AI-generated red flags.
+- **Scan history** — View recent scans and expand to see past flags.
+
+## Project structure
+
+```
+├── src/           # Frontend (React + Vite)
+├── server/        # Backend (Express)
+├── .cursor/       # Cursor rules and agent instructions
+└── PROJECT_PLAN.md
+```
+
+See `PROJECT_PLAN.md` for the full implementation roadmap.
